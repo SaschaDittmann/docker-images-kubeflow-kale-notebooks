@@ -1,3 +1,19 @@
+#  Copyright 2020 The Kale Authors
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+# Use tensorflow-1.14.0 as a base image, allowing the user to
+# speficy if they want GPU support, by setting IMAGE_TYPE to "gpu".
 ARG IMAGE_TYPE="cpu"
 FROM gcr.io/kubeflow-images-public/tensorflow-1.15.2-notebook-${IMAGE_TYPE}:1.0.0
 USER root
@@ -18,7 +34,7 @@ RUN echo "set background=dark" >> /etc/vim/vimrc.local
 RUN pip3 install --upgrade pip && \
     pip3 install --upgrade "jupyterlab>=2.0.0,<3.0.0" && \
     pip3 install "enum34==1.1.8" && \
-    pip3 install https://storage.googleapis.com/ml-pipeline/release/latest/kfp.tar.gz --upgrade && \
+    pip3 install kfp --upgrade && \
     pip3 install -U kubeflow-kale && \
     jupyter labextension install kubeflow-kale-labextension
 
