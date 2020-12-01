@@ -42,6 +42,8 @@ RUN echo "jovyan ALL=(ALL:ALL) NOPASSWD:ALL" > /etc/sudoers.d/jovyan
 WORKDIR /home/jovyan
 USER jovyan
 
+RUN git clone https://github.com/kubeflow-kale/examples.git
+
 CMD ["sh", "-c", \
      "jupyter lab --notebook-dir=/home/jovyan --ip=0.0.0.0 --no-browser \
       --allow-root --port=8888 --LabApp.token='' --LabApp.password='' \
